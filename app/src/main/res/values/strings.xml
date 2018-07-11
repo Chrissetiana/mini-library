@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Mini Library</string>
+
+    <string name="hint_search">Search books</string>
+    <string name="hint_title">Android Things</string>
+    <string name="hint_author">by chrissetiana</string>
+    <string name="hint_year">2018.</string>
+    <string name="hint_publisher">Android Studio.</string>
+    <string name="hint_pages">1315 pages</string>
+    <string name="hint_link">https://books.google.com.ng/books?isbn=0123456789</string>
+    <string name="hint_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+
+    <string name="button_search">Search</string>
 </resources>
