@@ -16,11 +16,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BookQuery {
     private final static String TAG = BookQuery.class.getSimpleName();
 
-    public static ArrayList<BookActivity> fetchData(String src) {
+    public static List<BookActivity> fetchData(String src) {
         URL url = createUrl(src);
         String response = null;
 
@@ -64,12 +65,12 @@ public class BookQuery {
 
             if (connection.getResponseCode() == 200) {
                 inputStream = connection.getInputStream();
-                response = readStream(inputStream);
+                response = readFromStream(inputStream);
             } else {
                 Log.e(TAG, "Error code: " + connection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(TAG, "Cannot establish connection");
+            Log.e(TAG, "Problem in establishing connection");
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -81,7 +82,7 @@ public class BookQuery {
         return response;
     }
 
-    private static String readStream(InputStream stream) throws IOException {
+    private static String readFromStream(InputStream stream) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
 
         if (stream != null) {
@@ -123,11 +124,16 @@ public class BookQuery {
                 JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
                 String image = imageLinks.getString("smallThumbnail");
 
-                BookActivity book = new BookActivity(title, author, published, publisher, pages, description, image);
+                JSONArray industryIdentifiers = volumeInfo.getJSONArray("industryIdentifiers");
+                JSONObject identifiers = industryIdentifiers.getJSONObject(0);
+                String isbn = identifiers.getString("identifiers");
+
+                BookActivity book = new BookActivity(title, author, published, publisher, pages, description, image, isbn);
                 list.add(book);
+                Log.v(TAG, book.toString());
             }
         } catch (JSONException e) {
-            Log.e(TAG, "Cannot read data", e);
+            Log.e(TAG, "Problem parsing data", e);
         }
         return list;
     }

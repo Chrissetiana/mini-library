@@ -1,6 +1,8 @@
 package com.chrissetiana.bookapp;
 
-public class BookActivity {
+import java.util.ArrayList;
+
+public class BookActivity extends ArrayList<BookActivity> {
     private String bookTitle; // items[] > volumeinfo{} > bookTitle""
     private String bookAuthor; // items[] > volumeinfo{} > authors[]
     private String published; // items[] > volumeinfo{} > publishedDate""
@@ -10,7 +12,7 @@ public class BookActivity {
     private String bookDescription; // items[] > searchinfo{} > textSnippet
     private String isbn; // items[] > volumeinfo{} > industryIdentifiers[] > identifiers""
 
-    public BookActivity(String title, String author, String year, String publisher, String pages, String description, String image) {
+    public BookActivity(String title, String author, String year, String publisher, String pages, String description, String image, String isbn) {
         bookTitle = title;
         bookAuthor = author;
         published = year;
@@ -18,6 +20,7 @@ public class BookActivity {
         bookPages = pages;
         bookDescription = description;
         bookThumbnail = image;
+        this.isbn = isbn;
     }
 
     public String getBookTitle() {
@@ -46,5 +49,9 @@ public class BookActivity {
 
     public String getBookThumbnail() {
         return bookThumbnail;
+    }
+
+    public String getIsbn() {
+        return isbn;
     }
 }
