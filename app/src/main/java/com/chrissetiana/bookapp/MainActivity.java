@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private String source = "https://www.googleapis.com/books/v1/volumes?q=";
     BookAdapter adapter;
     ProgressBar progress;
     TextView emptyText;
+    private String source = "https://www.googleapis.com/books/v1/volumes?q=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

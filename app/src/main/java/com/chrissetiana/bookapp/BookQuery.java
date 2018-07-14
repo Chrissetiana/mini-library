@@ -31,7 +31,7 @@ public class BookQuery {
             Log.e(TAG, "Connection not available", e);
         }
 
-        ArrayList<BookActivity> list = getJSONData(response);
+        List<BookActivity> list = getJSONData(response);
         return list;
     }
 
@@ -44,11 +44,13 @@ public class BookQuery {
             Log.e(TAG, "Error in making connection", e);
             return null;
         }
-        return null;
+
+        return newUrl;
     }
 
     private static String makeHttpReq(URL varUrl) throws IOException {
         String response = "";
+
         if (varUrl == null) {
             return response;
         }
@@ -62,7 +64,6 @@ public class BookQuery {
             connection.setReadTimeout(10000);
             connection.setConnectTimeout(10000);
             connection.connect();
-
             if (connection.getResponseCode() == 200) {
                 inputStream = connection.getInputStream();
                 response = readFromStream(inputStream);
@@ -97,40 +98,43 @@ public class BookQuery {
         return stringBuilder.toString();
     }
 
-    private static ArrayList<BookActivity> getJSONData(String source) {
+    private static List<BookActivity> getJSONData(String source) {
         if (TextUtils.isEmpty(source)) {
             return null;
         }
 
-        ArrayList<BookActivity> list = new ArrayList<>();
+        List<BookActivity> list = new ArrayList<>();
 
         try {
             JSONObject object = new JSONObject(source);
             JSONArray items = object.getJSONArray("items");
+            int len = items.length();
 
-            for (int i = 0; i < items.length(); i++) {
-                JSONObject info = items.getJSONObject(i);
+            for (int i = 0; i < len; i++) {
+                JSONObject property = items.getJSONObject(i);
+                JSONObject volumeInfo = property.getJSONObject("volumeInfo");
 
-                JSONObject searchInfo = info.getJSONObject("searchInfo");
-                String description = searchInfo.getString("textSnippet");
-
-                JSONObject volumeInfo = info.getJSONObject("volumeInfo");
-                String title = volumeInfo.getString("bookTitle");
-                String author = volumeInfo.getString("authors");
-                String publisher = volumeInfo.getString("publishedDate");
-                String published = volumeInfo.getString("publisher");
-                String pages = volumeInfo.getString("pageCount");
-
-                JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-                String image = imageLinks.getString("smallThumbnail");
+                String author = "";
+                JSONArray authors = volumeInfo.getJSONArray("authors");
+                for (int j = 0; j < authors.length(); j++) {
+                    author += authors.getString(j) + ", ";
+                }
 
                 JSONArray industryIdentifiers = volumeInfo.getJSONArray("industryIdentifiers");
                 JSONObject identifiers = industryIdentifiers.getJSONObject(0);
-                String isbn = identifiers.getString("identifiers");
+                String isbn = identifiers.optString("identifiers");
+
+                String title = volumeInfo.optString("title");
+                String published = volumeInfo.optString("publishedDate");
+                String publisher = volumeInfo.optString("publisher");
+                String pages = volumeInfo.optString("pageCount");
+                String description = volumeInfo.optString("description");
+
+                JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                int image = imageLinks.optInt("smallThumbnail");
 
                 BookActivity book = new BookActivity(title, author, published, publisher, pages, description, image, isbn);
                 list.add(book);
-                Log.v(TAG, book.toString());
             }
         } catch (JSONException e) {
             Log.e(TAG, "Problem parsing data", e);

@@ -8,11 +8,11 @@ public class BookActivity extends ArrayList<BookActivity> {
     private String published; // items[] > volumeinfo{} > publishedDate""
     private String publisher; // items[] > volumeinfo{} > publisher""
     private String bookPages; // items[] > volumeinfo{} > pageCount#
-    private String bookThumbnail; // items[] > volumeinfo{} > imageLinks{} > smallThumbnail""
+    private int bookThumbnail = -1; // items[] > volumeinfo{} > imageLinks{} > smallThumbnail""
     private String bookDescription; // items[] > searchinfo{} > textSnippet
     private String isbn; // items[] > volumeinfo{} > industryIdentifiers[] > identifiers""
 
-    public BookActivity(String title, String author, String year, String publisher, String pages, String description, String image, String isbn) {
+    public BookActivity(String title, String author, String year, String publisher, String pages, String description, int image, String isbn) {
         bookTitle = title;
         bookAuthor = author;
         published = year;
@@ -47,11 +47,15 @@ public class BookActivity extends ArrayList<BookActivity> {
         return bookDescription;
     }
 
-    public String getBookThumbnail() {
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public int getBookThumbnail() {
         return bookThumbnail;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public boolean hasImage() {
+        return getBookThumbnail() != -1;
     }
 }
