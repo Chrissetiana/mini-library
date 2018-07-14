@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(webIntent);
+                Toast.makeText(MainActivity.this, "Redirecting...", Toast.LENGTH_SHORT).show();
 
                 Log.v("MainActivity", "Redirecting to " + uri.toString());
             }

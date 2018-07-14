@@ -9,6 +9,7 @@
         android:id="@+id/book_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_centerVertical="true"
         android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
@@ -46,16 +47,16 @@
 
             <TextView
                 android:id="@+id/book_publisher"
-                android:textSize="@dimen/size_subtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/size_subtext"
                 tools:text="@string/hint_publisher" />
 
             <TextView
                 android:id="@+id/book_pages"
                 android:layout_width="wrap_content"
-                android:textSize="@dimen/size_subtext"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/size_subtext"
                 tools:text="@string/hint_pages" />
 
         </LinearLayout>
@@ -66,6 +67,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="3"
+            android:textAlignment="gravity"
             android:textSize="@dimen/size_text"
             tools:text="@string/hint_desc" />
 

@@ -131,7 +131,7 @@ public class BookQuery {
                 String description = volumeInfo.optString("description");
 
                 JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-                int image = imageLinks.optInt("smallThumbnail");
+                String image = imageLinks.optString("smallThumbnail");
 
                 BookActivity book = new BookActivity(title, author, published, publisher, pages, description, image, isbn);
                 list.add(book);
