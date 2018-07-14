@@ -1,4 +1,8 @@
 <resources>
     <dimen name="outer">16dp</dimen>
     <dimen name="inner">8dp</dimen>
+
+    <dimen name="size_title">18sp</dimen>
+    <dimen name="size_text">15sp</dimen>
+    <dimen name="size_subtext">12sp</dimen>
 </resources>

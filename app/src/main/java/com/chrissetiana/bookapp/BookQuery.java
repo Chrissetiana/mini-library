@@ -117,12 +117,12 @@ public class BookQuery {
                 String author = "";
                 JSONArray authors = volumeInfo.getJSONArray("authors");
                 for (int j = 0; j < authors.length(); j++) {
-                    author += authors.getString(j) + ", ";
+                    author += authors.optString(j);
                 }
 
                 JSONArray industryIdentifiers = volumeInfo.getJSONArray("industryIdentifiers");
                 JSONObject identifiers = industryIdentifiers.getJSONObject(0);
-                String isbn = identifiers.optString("identifiers");
+                String isbn = identifiers.optString("identifier");
 
                 String title = volumeInfo.optString("title");
                 String published = volumeInfo.optString("publishedDate");

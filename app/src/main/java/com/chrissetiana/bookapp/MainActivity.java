@@ -36,10 +36,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText searchText = findViewById(R.id.search_text);
                 String searchQuery = source + searchText.getText().toString();
-                // String searchStr = "https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes";
-                Log.v("MainActivity", searchQuery);
+
                 BookAsyncTask task = new BookAsyncTask();
                 task.execute(searchQuery);
+                progress.setVisibility(View.VISIBLE);
+
+                Log.v("MainActivity", searchQuery);
             }
         });
 
@@ -50,8 +52,10 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 BookActivity current = adapter.getItem(position);
                 Uri uri = Uri.parse(getString(R.string.hint_link) + current.getIsbn());
+
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(webIntent);
+
                 Log.v("MainActivity", "Redirecting to " + uri.toString());
             }
         });
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<BookActivity> data) {
+            progress.setVisibility(View.GONE);
             adapter.clear();
 
             if (data != null && !data.isEmpty()) {
