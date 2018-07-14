@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
                 String searchQuery = source + searchText.getText().toString();
                 // String searchStr = "https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes";
                 Log.v("MainActivity", searchQuery);
+                BookAsyncTask task = new BookAsyncTask();
+                task.execute(searchQuery);
             }
         });
 
@@ -59,5 +61,27 @@ public class MainActivity extends AppCompatActivity {
 
         progress = findViewById(R.id.list_progress);
         progress.setVisibility(View.GONE);
+    }
+
+    private class BookAsyncTask extends AsyncTask<String, Void, List<BookActivity>> {
+
+        @Override
+        protected List<BookActivity> doInBackground(String... strings) {
+            if (strings.length < 1 || strings[0] == null) {
+                return null;
+            }
+
+            List<BookActivity> result = BookQuery.fetchData(strings[0]);
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(List<BookActivity> data) {
+            adapter.clear();
+
+            if (data != null && !data.isEmpty()) {
+                adapter.addAll(data);
+            }
+        }
     }
 }
