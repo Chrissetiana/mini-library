@@ -10,5 +10,9 @@
     <string name="hint_link">https://books.google.com.ng/books?isbn=</string>
     <string name="hint_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 
-    <string name="button_search">Search</string>
+    <string name="btn_desc">Search</string>
+    <string name="img_desc">book cover</string>
+
+    <string name="no_result">No data found.</string>
+    <string name="no_conn">No internet connection.</string>
 </resources>

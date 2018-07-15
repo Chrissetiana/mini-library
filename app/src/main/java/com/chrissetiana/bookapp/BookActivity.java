@@ -12,7 +12,7 @@ public class BookActivity extends ArrayList<BookActivity> {
     private String bookDescription; // items[] > searchinfo{} > textSnippet
     private String isbn; // items[] > volumeinfo{} > industryIdentifiers[] > identifiers""
 
-    public BookActivity(String title, String author, String year, String publisher, String pages, String description, String image, String isbn) {
+    BookActivity(String title, String author, String year, String publisher, String pages, String description, String image, String isbn) {
         bookTitle = title;
         bookAuthor = author;
         published = year;
@@ -40,7 +40,7 @@ public class BookActivity extends ArrayList<BookActivity> {
     }
 
     public String getBookPages() {
-        return bookPages;
+        return bookPages + " pp.";
     }
 
     public String getBookDescription() {

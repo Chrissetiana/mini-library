@@ -1,6 +1,7 @@
 package com.chrissetiana.bookapp;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +15,21 @@ import java.util.ArrayList;
 
 public class BookAdapter extends ArrayAdapter<BookActivity> {
 
-    public BookAdapter(Activity context, ArrayList<BookActivity> list) {
+    BookAdapter(Activity context, ArrayList<BookActivity> list) {
         super(context, 0, list);
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
+
         if (view == null) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.activity_layout, parent, false);
         }
+
         BookActivity current = getItem(position);
+        assert current != null;
 
         TextView title = view.findViewById(R.id.book_title);
         title.setText(current.getBookTitle());
@@ -33,13 +38,13 @@ public class BookAdapter extends ArrayAdapter<BookActivity> {
         author.setText(current.getBookAuthor());
 
         TextView published = view.findViewById(R.id.book_year);
-        published.setText(current.getPublished() + " - ");
+        published.setText(current.getPublished());
 
         TextView publisher = view.findViewById(R.id.book_publisher);
-        publisher.setText(current.getPublisher() + " - ");
+        publisher.setText(current.getPublisher());
 
         TextView pages = view.findViewById(R.id.book_pages);
-        pages.setText(current.getBookPages() + " pages");
+        pages.setText(current.getBookPages());
 
         TextView description = view.findViewById(R.id.book_desc);
         description.setText(current.getBookDescription());

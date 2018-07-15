@@ -31,12 +31,11 @@ public class BookQuery {
             Log.e(TAG, "Connection not available", e);
         }
 
-        List<BookActivity> list = getJSONData(response);
-        return list;
+        return getJSONData(response);
     }
 
     private static URL createUrl(String strUrl) {
-        URL newUrl = null;
+        URL newUrl;
 
         try {
             newUrl = new URL(strUrl);
@@ -64,6 +63,7 @@ public class BookQuery {
             connection.setReadTimeout(10000);
             connection.setConnectTimeout(10000);
             connection.connect();
+
             if (connection.getResponseCode() == 200) {
                 inputStream = connection.getInputStream();
                 response = readFromStream(inputStream);
@@ -71,15 +71,17 @@ public class BookQuery {
                 Log.e(TAG, "Error code: " + connection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(TAG, "Problem in establishing connection");
+            Log.e(TAG, "Invalid data received");
         } finally {
             if (connection != null) {
                 connection.disconnect();
             }
+
             if (inputStream != null) {
                 inputStream.close();
             }
         }
+
         return response;
     }
 
@@ -95,6 +97,7 @@ public class BookQuery {
                 line = bufferedReader.readLine();
             }
         }
+
         return stringBuilder.toString();
     }
 
@@ -108,16 +111,16 @@ public class BookQuery {
         try {
             JSONObject object = new JSONObject(source);
             JSONArray items = object.getJSONArray("items");
-            int len = items.length();
 
+            int len = items.length();
             for (int i = 0; i < len; i++) {
                 JSONObject property = items.getJSONObject(i);
                 JSONObject volumeInfo = property.getJSONObject("volumeInfo");
 
-                String author = "";
+                StringBuilder author = new StringBuilder();
                 JSONArray authors = volumeInfo.getJSONArray("authors");
                 for (int j = 0; j < authors.length(); j++) {
-                    author += authors.optString(j);
+                    author.append(authors.optString(j));
                 }
 
                 JSONArray industryIdentifiers = volumeInfo.getJSONArray("industryIdentifiers");
@@ -133,12 +136,13 @@ public class BookQuery {
                 JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
                 String image = imageLinks.optString("smallThumbnail");
 
-                BookActivity book = new BookActivity(title, author, published, publisher, pages, description, image, isbn);
+                BookActivity book = new BookActivity(title, author.toString(), published, publisher, pages, description, image, isbn);
                 list.add(book);
             }
         } catch (JSONException e) {
             Log.e(TAG, "Problem parsing data", e);
         }
+
         return list;
     }
 }
