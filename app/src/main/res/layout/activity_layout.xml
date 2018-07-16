@@ -32,14 +32,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spaceout"
                 android:layout_marginRight="@dimen/spaceout"
-                android:textSize="@dimen/size_title"
+                android:autoSizeMaxTextSize="@dimen/size_max_title"
+                android:autoSizeMinTextSize="@dimen/size_min_title"
+                android:autoSizeStepGranularity="@dimen/size_step"
+                android:autoSizeTextType="uniform"
                 tools:text="@string/hint_title" />
 
             <TextView
                 android:id="@+id/book_pages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/size_subtext"
+                android:autoSizeMaxTextSize="@dimen/size_max_subtext"
+                android:autoSizeMinTextSize="@dimen/size_min_subtext"
+                android:autoSizeStepGranularity="@dimen/size_step"
+                android:autoSizeTextType="uniform"
                 tools:text="@string/hint_pages" />
 
         </LinearLayout>
@@ -48,7 +54,10 @@
             android:id="@+id/book_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/size_text"
+            android:autoSizeMaxTextSize="@dimen/size_max_text"
+            android:autoSizeMinTextSize="@dimen/size_min_text"
+            android:autoSizeStepGranularity="@dimen/size_step"
+            android:autoSizeTextType="uniform"
             tools:text="@string/hint_author" />
 
         <LinearLayout
@@ -62,14 +71,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spaceout"
                 android:layout_marginRight="@dimen/spaceout"
-                android:textSize="@dimen/size_subtext"
+                android:autoSizeMaxTextSize="@dimen/size_max_subtext"
+                android:autoSizeMinTextSize="@dimen/size_min_subtext"
+                android:autoSizeStepGranularity="@dimen/size_step"
+                android:autoSizeTextType="uniform"
                 tools:text="@string/hint_year" />
 
             <TextView
                 android:id="@+id/book_publisher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/size_subtext"
+                android:autoSizeMaxTextSize="@dimen/size_max_subtext"
+                android:autoSizeMinTextSize="@dimen/size_min_subtext"
+                android:autoSizeStepGranularity="@dimen/size_step"
+                android:autoSizeTextType="uniform"
                 tools:text="@string/hint_publisher" />
 
         </LinearLayout>
@@ -78,10 +93,13 @@
             android:id="@+id/book_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="@dimen/size_max_text"
+            android:autoSizeMinTextSize="@dimen/size_min_text"
+            android:autoSizeStepGranularity="@dimen/size_step"
+            android:autoSizeTextType="uniform"
             android:ellipsize="end"
             android:maxLines="3"
             android:textAlignment="gravity"
-            android:textSize="@dimen/size_text"
             tools:text="@string/hint_desc" />
 
     </LinearLayout>

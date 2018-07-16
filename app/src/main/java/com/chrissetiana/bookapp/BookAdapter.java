@@ -51,7 +51,11 @@ public class BookAdapter extends ArrayAdapter<BookActivity> {
 
         ImageView thumbnail = view.findViewById(R.id.book_image);
         if (current.getBookThumbnail() != null) {
-            Picasso.get().load(current.getBookThumbnail()).into(thumbnail);
+            Picasso.get()
+                    .load(current.getBookThumbnail())
+                    .placeholder(R.drawable.no_image)
+                    .centerCrop()
+                    .into(thumbnail);
             thumbnail.setVisibility(View.VISIBLE);
         } else {
             thumbnail.setVisibility(View.GONE);
