@@ -1,4 +1,4 @@
-package com.chrissetiana.bookapp;
+package com.chrissetiana.minilibrary;
 
 import java.util.ArrayList;
 

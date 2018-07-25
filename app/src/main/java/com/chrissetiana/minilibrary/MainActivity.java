@@ -1,4 +1,4 @@
-package com.chrissetiana.bookapp;
+package com.chrissetiana.minilibrary;
 
 import android.content.Context;
 import android.content.Intent;
