@@ -54,7 +54,6 @@ public class BookAdapter extends ArrayAdapter<BookActivity> {
             Picasso.get()
                     .load(current.getBookThumbnail())
                     .placeholder(R.drawable.no_image)
-                    .centerCrop()
                     .into(thumbnail);
             thumbnail.setVisibility(View.VISIBLE);
         } else {
